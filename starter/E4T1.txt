@@ -1,5 +1,3 @@
-
-
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
 
 1) Place the Web Service instance to a private subnet (i.e. no route to internet via igw)
@@ -9,3 +7,6 @@
 # Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
 
 Create a VPC Gateway endpoint for S3, specify policy in VPCE to allow only priviledged users (IAM Role) to use VPCE and update the bucket policy to allow access only from VPCE.    
+
+
+The Load Balancer in the public subnet needs to be public. But the webserver can have port 80 locked down to only be accessible from the Load Balancers. The Web server security group can enforce this. 
