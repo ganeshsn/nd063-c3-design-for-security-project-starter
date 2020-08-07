@@ -1,0 +1,60 @@
+I) To validate IaC CF templates, I used cfn_nag tool.
+
+usage: cfn_nag_scan --input <CF yml file>
+
+The scanner identified potential security vulnerabilites.
+
+Security Groups found with ingress cidr that is not /32
+Security Groups found with cidr open to world on ingress
+Security Groups ingress with an ipProtocol of -1 found
+IAM role should not allow * resource on its permissions policy
+Fail: IAM role should not allow * action on its permissions policy
+Elastic Load Balancer V2 Listener Protocol should use HTTPS for ALBs
+Elastic Load Balancer V2 should have access logging enabled
+
+S3 Bucket should have encryption option set
+S3 Bucket should have access logging configured
+S3 bucket should likely have a bucket policy
+
+Fail: Missing egress rule means all traffic is allowed outbound.  Make this explicit if it is desired configuration
+
+
+II)  Updated CF templates fixing security group and IAM issues and run the scanner.
+
+   a) EC2 Instance role policy was updated to fix permissions policy that allows only GetObject on free receipe bucket.
+
+    Policies:
+        - PolicyName: InstanceRolePolicy-C3
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 's3:GetObject'
+                Resource: !Join
+                  - ''
+                  - - 'arn:aws:s3:::'
+                  - !Ref BucketNameRecipesFree
+                  - /*
+
+     b) WebAppSG security group was updated to fix Egress and Ingress rules as given below. 
+        This ingress rule allows only TCP 5000 from ELB and Egress rule specify the destination as ELB 
+
+     === 
+    WebAppSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: WebAppSG
+      GroupDescription: "Security group for this application server"
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        CidrIp: AppLoadBalancerSG
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: !Ref PublicSubnetTrusted
+      - IpProtocol: tcp
+        FromPort: 5000
+        ToPort: 5000
+        CidrIp: AppLoadBalancerSG
+      VpcId: !ImportValue VpcId
