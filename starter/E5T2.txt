@@ -11,6 +11,8 @@ Encryption that isn’t enabled on EBS or S3 buckets.
 
 ##Scan AMI’s or containers for OS vulnerabilities
 Qualys: Qualys provides out-of-box API’s to integrate into your DevOps process for scanning the AMI images
+Anchore: https://www.esecurityplanet.com/products/anchore-container-security.html
+Twistlock: https://www.esecurityplanet.com/products/twistlock-container-security.html
 
 ### Example vulnerability
 Vulnerability in OS.
