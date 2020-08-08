@@ -1,0 +1,19 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+
+inbound rule of WebAppSG (Web Server instance) should allow only TCP 5000 from AppLoadBalancerSG (App load balancer) and restrict SSH access to select IPs.
+Web Service Instance - C3 . Security group inbound rules need to be updated.
+
+a) Allow only TCP 5000 traffic from App load balance
+     - Update source of TCP 5000 to AppLoadBalancerSG
+b) Remove HTTP 80 and All traffic rules from WebAppSG inbound rules
+c) Remove all traffic rules from WebAppSG rules
+d) Restrict SSH access - Specify IP address(s) instead of 0.0.0.0/0 as the source
+
+
+# Poor practice 2
+
+Place Web Server instance, target of app load balancer in a private subnet
+Apply NACL to alloe inbound traffic from Public subnet where ALB was setup.
+Specify s3 bucket name in InstanceRolePolicy-C3 policy instead of "Resource:*"
