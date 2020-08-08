@@ -10,9 +10,10 @@ Access logs that aren’t enabled
 Encryption that isn’t enabled on EBS or S3 buckets.
 
 ##Scan AMI’s or containers for OS vulnerabilities
-Qualys
+Qualys: Qualys provides out-of-box API’s to integrate into your DevOps process for scanning the AMI images
 
 ### Example vulnerability
+Vulnerability in OS.
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
 Prowler
