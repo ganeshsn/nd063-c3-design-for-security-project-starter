@@ -1,4 +1,5 @@
 # Describe GuardDuty findings that were detected related to the brute force attack
+GuardDuty identified that an malicious actor is guessing password and attacking the target with the intention of gaining access.
 
 # Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
 
