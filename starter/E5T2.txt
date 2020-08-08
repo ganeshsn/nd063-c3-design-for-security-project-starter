@@ -1,27 +1,26 @@
 # Identify tools that will allow you to do the following:
 
 ## Scan infrastructure as code templates
-
-Security code analysis of CloudFormation template to provision AWS resources
-You can use Stelligent’s cfn_nag tool to perform additional validation of your template resources for security. The cfn-nag tool looks for patterns in CloudFormation templates that may indicate insecure infrastructure provisioning and validates against AWS best practices. For example:
-
-IAM rules that are too permissive (wildcards)
-Security group rules that are too permissive (wildcards)
-Access logs that aren’t enabled
-Encryption that isn’t enabled
-Password literals
-You provision a CodeBuild project for security code analysis as the second step in CodePipeline. This helps detect any insecure infrastructure provisioning issues.
+cfn_nag or cfn-python-lint or Checkov tool can be used or integrated into code pipeline to check CF templates for security vulnerabilites. 
 
 ### Example vulnerability
+IAM policies that are too permissive like S3 action statement that allows all operations and access to all buckets.  
+Security group rules that allow 0.0.0.0/0 Cidr instead of /32 prefix or another security group.
+Access logs that aren’t enabled
+Encryption that isn’t enabled on EBS or S3 buckets.
 
 ##Scan AMI’s or containers for OS vulnerabilities
-How to build a CI/CD pipeline for container vulnerability scanning with Trivy and AWS Security Hub
+Qualys
 
 ### Example vulnerability
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
-https://aws.amazon.com/blogs/security/tag/devsecops/
-https://www.notsosecure.com/achieving-cloud-native-devsecops-aws/
-https://www.notsosecure.com/achieving-devsecops-with-open-source-tools/
+Prowler
+#https://aws.amazon.com/blogs/security/tag/devsecops/
+#https://www.notsosecure.com/achieving-cloud-native-devsecops-aws/
+#https://www.notsosecure.com/achieving-devsecops-with-open-source-tools/
 
 ### Example vulnerability
+Ensure MFA is enabled for IAM users who have access to AWS console.
+Ensure monitoring of root account using Cloud Watch and alarms.
+
