@@ -1,0 +1,11 @@
+- Enable log metric filter and Cloud Watch Alarms for security group changes.
+- Enable log metric filter and Cloud watch alarm for changes to NACL.
+- Setup WAF in front of ELB
+- Use HTTPS to connect to WS instance
+- Delete public keys from the authorizedkeys file on EC2 instance 
+- Implement alternative authentication mechanisms, including LDAP or Active Directory authentication, and disable Amazon EC2 key pair authentication.
+- Enable versioning on S3 secret recipes bucket
+- Limit users who can modify secret recipe data
+- Set up CRR on Secret Recipe bucket
+- Only install and run trusted software from a trusted software provider. 
+- Update ELB SG to explicitly deny access from specific IP addresses 
