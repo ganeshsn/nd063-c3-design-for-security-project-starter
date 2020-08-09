@@ -1,8 +1,6 @@
 Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+ - Vulnerability: Application is accessible via Public IP of Web Service instance-C3 which exposes the application to be reachable directly from internet (http://<PUBLIC_IP>:5000/free_recipe.
 
 Bonus - provide recommendations on how to remediate the vulnerabilities.
-
-Vulnerability: Application is accessible via Public IP of Web Service instance-C3 which exposes the application to be reachable directly from internet (http://<PUBLIC_IP>:5000/free_recipe.
-
 
 Recommendation: Update the python application to accept connections on private ip of Web Service instance-C3 (10.192.10.0/24 or 10.192.11.0/24) and port 5000.
